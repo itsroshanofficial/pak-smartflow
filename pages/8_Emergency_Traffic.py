@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
-from ui import inject_css, hero, kpi, disclaimer, RED, CYAN, GREEN, AMBER
+from ui import inject_css, hero, kpi, disclaimer, back_to_home, RED, CYAN, GREEN, AMBER
 
 st.set_page_config(page_title="Emergency & Traffic · Pak-SmartFlow", page_icon="🚑", layout="wide")
 inject_css()
@@ -40,4 +40,5 @@ with c2:
     st.metric("Current Traffic Flow Efficiency", "+34.5%", "vs fixed timers")
     st.slider("Adjust Green Light Duration (sec)", 30, 120, 60)
 
+back_to_home()
 disclaimer()
