@@ -70,6 +70,7 @@ with c4:
         
         plate_no = f"{random.choice(['LEA','ISB','RSP','KHI'])}-{random.randint(1000,9999)}"
         
+        # Supabase database mein record insert karna
         insert_violation(
             plate=plate_no,
             violation_type=viol[0],
