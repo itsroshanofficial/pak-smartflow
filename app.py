@@ -70,7 +70,6 @@ with c4:
         
         plate_no = f"{random.choice(['LEA','ISB','RSP','KHI'])}-{random.randint(1000,9999)}"
         
-        # Supabase database mein record insert karna
         insert_violation(
             plate=plate_no,
             violation_type=viol[0],
@@ -95,25 +94,36 @@ for i, (ic, nm, num, col) in enumerate(AGENTS):
     with cols[i % 4]:
         agent_card(ic, nm, num, col)
 
-# ---------- Quick Navigation for Mobile/Web ----------
+# ---------- Quick Navigation Buttons (Error-Free) ----------
 st.markdown("---")
 st.markdown("#### 🧭 Quick Page Navigation (All Modules)")
 nav1, nav2, nav3 = st.columns(3)
+
 with nav1:
-    st.page_link("pages/7_Case_Journey.py", label="🎬 Case Journey", icon="🎬")
-    st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Traffic", icon="🚑")
+    if st.button("🎬 Case Journey", use_container_width=True):
+        st.switch_page("pages/7_Case_Journey.py")
+    if st.button("🚑 Emergency Traffic", use_container_width=True):
+        st.switch_page("pages/8_Emergency_Traffic.py")
+
 with nav2:
-    st.page_link("pages/Compliance_Enforcement.py", label="🛡️ Compliance & Enforcement", icon="🛡️")
-    st.page_link("pages/Dispute_Center.py", label="⚖️ Dispute Center", icon="⚖️")
+    if st.button("🛡️ Compliance & Enforcement", use_container_width=True):
+        st.switch_page("pages/Compliance_Enforcement.py")
+    if st.button("⚖️ Dispute Center", use_container_width=True):
+        st.switch_page("pages/Dispute_Center.py")
+
 with nav3:
-    st.page_link("pages/Alert_System.py", label="🚨 Alert System", icon="🚨")
-    st.page_link("pages/2_Historical_Analytics.py", label="📈 Historical Analytics", icon="📈")
+    if st.button("🚨 Alert System", use_container_width=True):
+        st.switch_page("pages/Alert_System.py")
+    if st.button("📈 Historical Analytics", use_container_width=True):
+        st.switch_page("pages/2_Historical_Analytics.py")
 
 st.markdown("#### 🎬 Judges ke liye Special Demos")
 a, b = st.columns(2)
 with a:
-    st.page_link("pages/7_Case_Journey.py", label="▶ Start End-to-End Demo (Detection → Resolution)", icon="🎬")
+    if st.button("▶ Start End-to-End Demo", use_container_width=True):
+        st.switch_page("pages/7_Case_Journey.py")
 with b:
-    st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Green Corridor + Signal Optimizer", icon="🚦")
+    if st.button("🚑 Emergency Green Corridor", use_container_width=True):
+        st.switch_page("pages/8_Emergency_Traffic.py")
 
 disclaimer()
