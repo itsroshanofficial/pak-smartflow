@@ -1,17 +1,36 @@
 import streamlit as st
 import pandas as pd
 import time
+import streamlit.components.v1 as components
+from ui import inject_css, hero, disclaimer, RED, CYAN, GREEN, AMBER
 
 st.set_page_config(
     page_title="Pak-SmartFlow - Alert System",
     page_icon="🚨",
     layout="wide"
 )
+inject_css()
 
-st.title("🚨 Automated Alert Dispatch Module")
-st.subheader("Simulate Real-Time SMS & Email Dispatches for High-Risk Traffic Violations")
+# Professional Navigation Buttons
+col_back, col_home = st.columns([1, 4])
+with col_back:
+    components.html("""
+        <div style="padding-top: 2px;">
+            <button onclick="window.history.back()" style="background: rgba(20,38,59,0.8); color: #38BDF8; border: 1px solid rgba(56,189,248,0.4); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;">
+                ⬅ Back
+            </button>
+        </div>
+    """, height=45)
+with col_home:
+    st.page_link("app.py", label="Go to Main Dashboard", icon="🏠")
 
-st.markdown("---")
+st.write("")
+
+hero(
+    "🚨 Automated Alert Dispatch Module",
+    "Simulate Real-Time SMS & Email Dispatches for High-Risk Traffic Violations",
+    [("DISPATCH SYSTEM", RED), ("REAL-TIME ALERTS", AMBER)]
+)
 
 col1, col2 = st.columns(2)
 
@@ -36,7 +55,7 @@ with col2:
 
 st.markdown("---")
 
-if st.button("🚀 Dispatch Automated Alert"):
+if st.button("🚀 Dispatch Automated Alert", use_container_width=True):
     with st.spinner("Connecting to National Traffic Gateway & Dispatching..."):
         time.sleep(1.5)  # Simulate network latency
         
@@ -64,7 +83,10 @@ if st.button("🚀 Dispatch Automated Alert"):
         label="📥 Download Dispatch Audit Log (CSV)",
         data=csv,
         file_name="pak_smartflow_alert_log.csv",
-        mime="text/csv"
+        mime="text/csv",
+        use_container_width=True
     )
-    
+
 st.info("💡 **Note:** This simulation demonstrates automated emergency and fine notification dispatches to vehicle owners and control units.")
+
+disclaimer()
