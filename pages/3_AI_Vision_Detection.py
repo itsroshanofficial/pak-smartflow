@@ -118,5 +118,5 @@ with a:
     st.page_link("pages/7_Case_Journey.py", label="▶ Start End-to-End Demo", icon="🎬")
 with b:
     st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Green Corridor", icon="🚦")
-
+back_to_home()
 disclaimer()
