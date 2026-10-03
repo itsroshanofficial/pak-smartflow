@@ -70,7 +70,6 @@ with c4:
         
         plate_no = f"{random.choice(['LEA','ISB','RSP','KHI'])}-{random.randint(1000,9999)}"
         
-        # Supabase database mein record insert karna
         insert_violation(
             plate=plate_no,
             violation_type=viol[0],
@@ -95,31 +94,24 @@ for i, (ic, nm, num, col) in enumerate(AGENTS):
     with cols[i % 4]:
         agent_card(ic, nm, num, col)
 
-# ---------- Complete Quick Navigation for All Modules ----------
+# ---------- Clean User Navigation ----------
 st.markdown("---")
-st.markdown("#### 🧭 Quick Page Navigation (All Modules)")
+st.markdown("#### 🧭 Quick Page Navigation")
 nav1, nav2, nav3 = st.columns(3)
 
 with nav1:
-    st.page_link("app.py", label="🏠 Command Center (Home)", icon="🏠")
-    st.page_link("pages/1_Live_Analysis.py", label="📡 Live Analysis", icon="📡")
-    st.page_link("pages/2_Historical_Analytics.py", label="📈 Historical Analytics", icon="📈")
+    st.page_link("app.py", label="Command Center (Home)", icon="🏠")
+    st.page_link("pages/1_Live_Analysis.py", label="Live Analysis", icon="📡")
+    st.page_link("pages/2_Historical_Analytics.py", label="Historical Analytics", icon="📈")
 
 with nav2:
-    st.page_link("pages/3_AI_Vision_Detection.py", label="👁️ AI Vision Detection", icon="👁️")
-    st.page_link("pages/4_Alert_System.py", label="🚨 Alert System", icon="🚨")
-    st.page_link("pages/5_Dispute_Resolution.py", label="⚖️ Dispute Resolution", icon="⚖️")
+    st.page_link("pages/3_AI_Vision_Detection.py", label="AI Vision Detection", icon="👁️")
+    st.page_link("pages/4_Alert_System.py", label="Alert System", icon="🚨")
+    st.page_link("pages/5_Dispute_Resolution.py", label="Dispute Resolution", icon="⚖️")
 
 with nav3:
-    st.page_link("pages/6_Enforcement_Escalation.py", label="🛡️ Enforcement & Escalation", icon="🛡️")
-    st.page_link("pages/7_Case_Journey.py", label="🎬 Case Journey", icon="🎬")
-    st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Traffic", icon="🚑")
-
-st.markdown("#### 🎬 Judges ke liye Special Demos")
-a, b = st.columns(2)
-with a:
-    st.page_link("pages/7_Case_Journey.py", label="▶ Start End-to-End Demo (Detection → Resolution)", icon="🎬")
-with b:
-    st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Green Corridor + Signal Optimizer", icon="🚦")
+    st.page_link("pages/6_Enforcement_Escalation.py", label="Enforcement & Escalation", icon="🛡️")
+    st.page_link("pages/7_Case_Journey.py", label="Case Journey", icon="🎬")
+    st.page_link("pages/8_Emergency_Traffic.py", label="Emergency Traffic", icon="🚑")
 
 disclaimer()
