@@ -129,5 +129,5 @@ if st.button("Analyze Traffic Case", use_container_width=True):
         mime="text/csv",
         use_container_width=True
     )
-
+back_to_home()
 disclaimer()
