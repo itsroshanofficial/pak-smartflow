@@ -9,22 +9,30 @@ SUPABASE_KEY = st.secrets["supabase"]["key"]
 def init_connection() -> Client:
     return create_client(SUPABASE_URL, SUPABASE_KEY)
 
+# Global client instance
 supabase = init_connection()
 
-def add_violation(vehicle_no, violation_type, confidence, risk, compliance):
-    """Database mein new violation save karne ke liye function"""
-    data = {
-        "vehicle_number": vehicle_no,
-        "violation_type": violation_type,
-        "confidence_score": float(confidence),
-        "risk_score": float(risk),
-        "compliance_score": float(compliance),
-        "status": "Pending"
-    }
-    response = supabase.table("violations").insert(data).execute()
-    return response.data
+def insert_violation(plate: str, violation_type: str, risk_score: float, final_score: float, action: str):
+    """Nayi violation ko Supabase table ('violations') mein save karta hai."""
+    try:
+        data = {
+            "plate": plate,
+            "violation_type": violation_type,
+            "risk_score": float(risk_score),
+            "final_score": float(final_score),
+            "action": action
+        }
+        response = supabase.table("violations").insert(data).execute()
+        return response
+    except Exception as e:
+        st.error(f"Database insert karne mein error aaya: {e}")
+        return None
 
-def get_all_violations():
-    """Saari violations fetch karne ke liye function"""
-    response = supabase.table("violations").select("*").execute()
-    return response.data
+def get_violations(limit: int = 50):
+    """Supabase table se recent violations fetch karta hai."""
+    try:
+        response = supabase.table("violations").select("*").order("created_at", desc=True).limit(limit).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Data fetch karne mein error aaya: {e}")
+        return []
