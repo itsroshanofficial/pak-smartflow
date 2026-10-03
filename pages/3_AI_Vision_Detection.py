@@ -7,7 +7,7 @@ import streamlit as st
 
 from pak_smartflow_engine import pak_smartflow_engine
 from db_helper import insert_violation
-from ui import (inject_css, hero, kpi, agent_card, style_fig, disclaimer,
+from ui import (inject_css, hero, kpi, agent_card, style_fig, disclaimer, back_to_home,
                 AGENTS, AMBER, CYAN, GREEN, RED, VIOLET)
 
 st.set_page_config(page_title="Pak-SmartFlow · Command Center", page_icon="🚦", layout="wide")
@@ -43,7 +43,7 @@ with c1:
 with c2:
     types = ["Wrong Parking", "Speeding", "Red Light", "Dangerous Driving"]
     fig = go.Figure(go.Pie(labels=types, values=[42, 31, 19, 8], hole=.62,
-                           marker=dict(colors=[CYAN, AMBER, RED, VIOLET])))
+                            marker=dict(colors=[CYAN, AMBER, RED, VIOLET])))
     fig.update_layout(title="Violation mix")
     st.plotly_chart(style_fig(fig, 300), use_container_width=True)
 
@@ -94,7 +94,7 @@ for i, (ic, nm, num, col) in enumerate(AGENTS):
     with cols[i % 4]:
         agent_card(ic, nm, num, col)
 
-# ---------- Quick Navigation Buttons (Using st.page_link which handles auto-discovery safely) ----------
+# ---------- Quick Navigation Buttons ----------
 st.markdown("---")
 st.markdown("#### 🧭 Quick Page Navigation (All Modules)")
 nav1, nav2, nav3 = st.columns(3)
@@ -104,12 +104,11 @@ with nav1:
     st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Traffic", icon="🚑")
 
 with nav2:
-    # Agar aapki files ke sath numbers hain toh yahan update kar dein (e.g., pages/3_Compliance_Enforcement.py)
-    st.page_link("pages/Compliance_Enforcement.py", label="🛡️ Compliance & Enforcement", icon="🛡️")
-    st.page_link("pages/Dispute_Center.py", label="⚖️ Dispute Center", icon="⚖️")
+    st.page_link("pages/6_Enforcement_Escalation.py", label="🛡️ Compliance & Enforcement", icon="🛡️")
+    st.page_link("pages/5_Dispute_Resolution.py", label="⚖️ Dispute Center", icon="⚖️")
 
 with nav3:
-    st.page_link("pages/Alert_System.py", label="🚨 Alert System", icon="🚨")
+    st.page_link("pages/4_Alert_System.py", label="🚨 Alert System", icon="🚨")
     st.page_link("pages/2_Historical_Analytics.py", label="📈 Historical Analytics", icon="📈")
 
 st.markdown("#### 🎬 Judges ke liye Special Demos")
@@ -118,5 +117,6 @@ with a:
     st.page_link("pages/7_Case_Journey.py", label="▶ Start End-to-End Demo", icon="🎬")
 with b:
     st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Green Corridor", icon="🚦")
+
 back_to_home()
 disclaimer()
