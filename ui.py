@@ -2,7 +2,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 
-AMBER, CYAN, GREEN, RED, VIOLET = "#F5B83D", "#38BDF8", "#34D399", "#F87171", "#A78BFA"
+AMBER, CYAN, GREEN, RED, VIOLET, SHADE = "#F5B83D", "#38BDF8", "#34D399", "#F87171", "#A78BFA", "rgba(255,255,255,0.08)"
 
 AGENTS = [
     ("📷", "Detection", "Agent 1", CYAN),
@@ -35,13 +35,30 @@ footer { visibility: hidden; }
 
 .block-container { padding-top: 1.4rem; max-width: 1280px; }
 section[data-testid="stSidebar"] { background: linear-gradient(180deg,#0f2238,#0a1626); border-right: 1px solid rgba(255,255,255,.06); }
+
+/* Sidebar Navigation ko mazeed bold aur behtar banane ke liye */
+[data-testid="stSidebarNav"] span {
+    font-weight: 800 !important;
+    font-size: 15px !important;
+    color: #F5B83D !important;
+    letter-spacing: -0.2px;
+}
+[data-testid="stSidebarNav"] a {
+    padding: 6px 10px !important;
+    margin-bottom: 4px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease-in-out;
+}
+[data-testid="stSidebarNav"] a:hover {
+    background-color: rgba(245, 184, 61, 0.18) !important;
+    transform: translateX(3px);
+}
+
 .hero { padding: 26px 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(135deg, rgba(20,38,59,.95), rgba(13,27,42,.9)); position: relative; overflow: hidden; margin-bottom: 18px; }
 .hero:before { content:""; position:absolute; top:-120px; right:-80px; width:380px; height:380px; background: radial-gradient(circle, rgba(245,184,61,.22), transparent 65%); }
 .hero h1 { margin:0; font-size:2rem; font-weight:800; letter-spacing:-.5px; position:relative; }
 .hero p { margin:.4rem 0 .7rem; color:#9fb3c8; position:relative; }
 .tag { display:inline-block; padding:3px 11px; border-radius:999px; font-size:.72rem; font-weight:600; border:1px solid; margin:0 6px 4px 0; position:relative; }
-.live { display:inline-block; width:9px; height:9px; border-radius:50%; background:#34D399; margin-right:6px; animation:pulse 1.8s infinite; }
-@keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(52,211,153,.7);} 70% { box-shadow:0 0 0 10px rgba(52,211,153,0);} 100% { box-shadow:0 0 0 0 rgba(52,211,153,0);} }
 .kpi { padding:16px 18px; border-radius:16px; background:rgba(20,38,59,.75); border:1px solid rgba(255,255,255,.07); transition:transform .2s, border-color .2s; }
 .kpi:hover { transform:translateY(-3px); border-color:rgba(245,184,61,.5); }
 .kpi .l { color:#8ea5bd; font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; }
@@ -66,7 +83,6 @@ section[data-testid="stSidebar"] { background: linear-gradient(180deg,#0f2238,#0
 </style>
 """
 
-
 def inject_css():
     st.markdown(_CSS, unsafe_allow_html=True)
     with st.sidebar:
@@ -78,7 +94,6 @@ def inject_css():
             unsafe_allow_html=True,
         )
 
-
 def hero(title, subtitle, tags=()):
     chips = "".join(
         f"<span class='tag' style='color:{c};border-color:{c}55;background:{c}14'>{t}</span>"
@@ -89,14 +104,12 @@ def hero(title, subtitle, tags=()):
         unsafe_allow_html=True,
     )
 
-
 def kpi(label, value, delta="", color=GREEN):
     st.markdown(
         f"<div class='kpi'><div class='l'>{label}</div><div class='v'>{value}</div>"
         f"<div class='d' style='color:{color}'>{delta}</div></div>",
         unsafe_allow_html=True,
     )
-
 
 def agent_card(icon, name, num, color, status="Online"):
     st.markdown(
@@ -105,7 +118,6 @@ def agent_card(icon, name, num, color, status="Online"):
         unsafe_allow_html=True,
     )
 
-
 def pipeline(labels, current, bad=()):
     parts = []
     for i, lb in enumerate(labels):
@@ -113,11 +125,9 @@ def pipeline(labels, current, bad=()):
         parts.append(f"<span class='pstep {cls}'>{lb}</span>")
     st.markdown("<div class='pipe'>" + "".join(parts) + "</div>", unsafe_allow_html=True)
 
-
 def terminal(lines):
     body = "<br>".join(f"<span class='{c}'>{t}</span>" for c, t in lines) or "<span>waiting…</span>"
     st.markdown(f"<div class='term'>{body}</div>", unsafe_allow_html=True)
-
 
 def style_fig(fig, height=300):
     fig.update_layout(
@@ -132,9 +142,7 @@ def style_fig(fig, height=300):
     fig.update_yaxes(gridcolor="rgba(255,255,255,.06)")
     return fig
 
-
 def gauge(value, title, low=0.3, high=0.6, height=230, invert=False):
-    """0-1 gauge. invert=True means higher is better (compliance)."""
     good, bad = (GREEN, RED) if not invert else (RED, GREEN)
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
@@ -152,7 +160,6 @@ def gauge(value, title, low=0.3, high=0.6, height=230, invert=False):
         },
     ))
     return style_fig(fig, height)
-
 
 def disclaimer():
     st.markdown(
