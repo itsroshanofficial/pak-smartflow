@@ -59,5 +59,5 @@ if st.button("⚖️ Execute Authority Decision", use_container_width=True):
         st.warning(f"🤝 Payment assistance and 15-day extension granted for vehicle {selected_vehicle}.")
     else:
         st.success(f"✅ Case dismissed and compliance restored for vehicle {selected_vehicle}.")
-
+back_to_home()
 disclaimer()
