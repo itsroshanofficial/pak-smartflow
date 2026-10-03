@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit.components.v1 as components
 from db_helper import get_violations
-from ui import inject_css, hero, kpi, style_fig, disclaimer, CYAN, AMBER, GREEN, RED
+from ui import inject_css, hero, kpi, style_fig, disclaimer, back_to_home, CYAN, AMBER, GREEN, RED
 
 st.set_page_config(page_title="Historical Analytics · Pak-SmartFlow", page_icon="📈", layout="wide")
 inject_css()
@@ -60,5 +60,6 @@ else:
                          title="Risk Score Distribution by Violation Type",
                          color_discrete_sequence=[CYAN, AMBER, RED, GREEN])
         st.plotly_chart(style_fig(fig, 300), use_container_width=True)
+
 back_to_home()
 disclaimer()
