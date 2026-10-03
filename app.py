@@ -97,19 +97,23 @@ for i, (ic, nm, num, col) in enumerate(AGENTS):
 
 # ---------- Quick Navigation for Mobile/Web ----------
 st.markdown("---")
-st.markdown("#### 🧭 Quick Page Navigation")
+st.markdown("#### 🧭 Quick Page Navigation (All Modules)")
 nav1, nav2, nav3 = st.columns(3)
 with nav1:
-    st.page_link("app.py", label="Command Center", icon="🏠")
+    st.page_link("pages/7_Case_Journey.py", label="🎬 Case Journey", icon="🎬")
+    st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Traffic", icon="🚑")
 with nav2:
-    st.page_link("pages/2_Historical_Analytics.py", label="Historical Analytics", icon="📈")
+    st.page_link("pages/Compliance_Enforcement.py", label="🛡️ Compliance & Enforcement", icon="🛡️")
+    st.page_link("pages/Dispute_Center.py", label="⚖️ Dispute Center", icon="⚖️")
 with nav3:
-    st.page_link("pages/7_Case_Journey.py", label="Case Journey", icon="🎬")
+    st.page_link("pages/Alert_System.py", label="🚨 Alert System", icon="🚨")
+    st.page_link("pages/2_Historical_Analytics.py", label="📈 Historical Analytics", icon="📈")
 
-st.markdown("#### 🎬 Judges ke liye")
+st.markdown("#### 🎬 Judges ke liye Special Demos")
 a, b = st.columns(2)
 with a:
     st.page_link("pages/7_Case_Journey.py", label="▶ Start End-to-End Demo (Detection → Resolution)", icon="🎬")
 with b:
     st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Green Corridor + Signal Optimizer", icon="🚦")
+
 disclaimer()
