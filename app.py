@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from pak_smartflow_engine import pak_smartflow_engine
+from db_helper import add_violation, get_all_violations
 
 st.set_page_config(
     page_title="Pak-SmartFlow",
@@ -9,14 +10,16 @@ st.set_page_config(
 )
 
 st.title("🚦 Pak-SmartFlow")
-st.subheader("AI-Powered Multi-Agent Traffic Intelligence System")
+st.subheader("AI-Powered Multi-Agent Traffic Intelligence System (Cloud Connected)")
 
 st.info(
-    "Prototype using synthetic data. "
+    "Prototype connected to Supabase Cloud Database. "
     "Any enforcement decision requires human review."
 )
 
 st.header("Vehicle & Traffic Inputs")
+
+vehicle_number = st.text_input("Vehicle Number", "LEA-1234")
 
 col1, col2 = st.columns(2)
 
@@ -89,8 +92,22 @@ if st.button("Analyze Traffic Case"):
     st.subheader("Recommended Action")
     st.success(result["Recommended Action"])
 
-    # Report Export Feature Added Here
+    # --- SUPABASE DATABASE INTEGRATION ---
+    try:
+        add_violation(
+            vehicle_no=vehicle_number,
+            violation_type=violation,
+            confidence=confidence,
+            risk=result["Risk Score"],
+            compliance=compliance
+        )
+        st.success("✅ Case successfully saved to Supabase Cloud Database!")
+    except Exception as e:
+        st.error(f"❌ Database save failed: {e}")
+
+    # Report Export Feature
     report_data = pd.DataFrame([{
+        "Vehicle Number": vehicle_number,
         "Violation": violation,
         "Detection Confidence": confidence,
         "Severity Score": severity,
@@ -118,3 +135,32 @@ if st.button("Analyze Traffic Case"):
         "Prototype recommendation only. Human review is required "
         "before any enforcement action."
     )
+
+# --- LIVE ANALYTICS & DATABASE RECORDS SECTION ---
+st.markdown("---")
+st.header("📊 Live Analytics & Database Records (Supabase Cloud)")
+
+if st.button("🔄 Refresh Analytics & Data"):
+    st.rerun()
+
+try:
+    db_records = get_all_violations()
+    if db_records:
+        df_supabase = pd.DataFrame(db_records)
+        
+        # Analytics Metrics Layout
+        col_m1, col_m2, col_m3 = st.columns(3)
+        col_m1.metric("Total Logged Violations", len(df_supabase))
+        col_m2.metric("Average Risk Score", round(df_supabase["risk_score"].mean(), 2))
+        col_m3.metric("Average Compliance Score", round(df_supabase["compliance_score"].mean(), 2))
+        
+        st.subheader("📈 Violation Type Distribution")
+        violation_counts = df_supabase["violation_type"].value_counts()
+        st.bar_chart(violation_counts)
+
+        st.subheader("📋 Raw Cloud Records Table")
+        st.dataframe(df_supabase, use_container_width=True)
+    else:
+        st.info("No records found in the Supabase database yet. Analyze a case above to add one!")
+except Exception as e:
+    st.error(f"Could not load analytics from database: {e}")
