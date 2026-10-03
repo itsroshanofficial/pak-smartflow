@@ -8,7 +8,7 @@ import streamlit as st
 from pak_smartflow_engine import pak_smartflow_engine
 from db_helper import insert_violation
 from ui import (inject_css, hero, kpi, agent_card, style_fig, disclaimer,
-                AGENTS, AMBER, CYAN, GREEN, RED, VIOLET, SHADE)
+                back_to_home, AGENTS, AMBER, CYAN, GREEN, RED, VIOLET, SHADE)
 
 st.set_page_config(page_title="Pak-SmartFlow · Command Center", page_icon="🚦", layout="wide")
 inject_css()
@@ -49,7 +49,7 @@ with c2:
 
 c3, c4 = st.columns([1, 1.3])
 with c3:
-    st.markdown("#### 🗺️️ Risk Hotspots")
+    st.markdown("#### 🗺 Risk Hotspots")
     hot = pd.DataFrame({
         "lat": [31.5204, 31.4504, 33.6844, 33.5651, 24.8607, 31.4187],
         "lon": [74.3587, 73.1350, 73.0479, 73.0169, 67.0011, 73.0790],
@@ -114,3 +114,5 @@ with nav3:
     st.page_link("pages/6_Enforcement_Escalation.py", label="Enforcement & Escalation", icon="🛡️")
     st.page_link("pages/7_Case_Journey.py", label="Case Journey", icon="🎬")
     st.page_link("pages/8_Emergency_Traffic.py", label="Emergency Traffic", icon="🚑")
+
+disclaimer()
