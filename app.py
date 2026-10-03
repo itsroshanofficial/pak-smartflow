@@ -43,7 +43,7 @@ with c1:
 with c2:
     types = ["Wrong Parking", "Speeding", "Red Light", "Dangerous Driving"]
     fig = go.Figure(go.Pie(labels=types, values=[42, 31, 19, 8], hole=.62,
-                           marker=dict(colors=[CYAN, AMBER, RED, VIOLET])))
+                            marker=dict(colors=[CYAN, AMBER, RED, VIOLET])))
     fig.update_layout(title="Violation mix")
     st.plotly_chart(style_fig(fig, 300), use_container_width=True)
 
