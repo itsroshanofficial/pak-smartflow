@@ -1,19 +1,35 @@
 import streamlit as st
 import pandas as pd
+import streamlit.components.v1 as components
 from pak_smartflow_engine import pak_smartflow_engine
+from ui import inject_css, hero, disclaimer, CYAN, AMBER, GREEN, RED
 
 st.set_page_config(
     page_title="Pak-SmartFlow - Live Analysis",
     page_icon="🚦",
     layout="wide"
 )
+inject_css()
 
-st.title("🚦 Pak-SmartFlow: Live Traffic Analysis")
-st.subheader("AI-Powered Multi-Agent Traffic Intelligence System")
+# Professional Navigation Buttons
+col_back, col_home = st.columns([1, 4])
+with col_back:
+    components.html("""
+        <div style="padding-top: 2px;">
+            <button onclick="window.history.back()" style="background: rgba(20,38,59,0.8); color: #38BDF8; border: 1px solid rgba(56,189,248,0.4); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;">
+                ⬅ Back
+            </button>
+        </div>
+    """, height=45)
+with col_home:
+    st.page_link("app.py", label="Go to Main Dashboard", icon="🏠")
 
-st.info(
-    "Prototype using synthetic data. "
-    "Any enforcement decision requires human review."
+st.write("")
+
+hero(
+    "🚦 Pak-SmartFlow: Live Traffic Analysis",
+    "AI-Powered Multi-Agent Traffic Intelligence & Decision Engine System",
+    [("LIVE ENGINE", RED), ("FUZZY LOGIC", CYAN)]
 )
 
 st.header("Vehicle & Traffic Inputs")
@@ -63,7 +79,7 @@ severity_map = {
 severity = severity_map[violation]
 st.write("Illustrative Severity Score:", severity)
 
-if st.button("Analyze Traffic Case"):
+if st.button("Analyze Traffic Case", use_container_width=True):
     result = pak_smartflow_engine(
         confidence,
         severity,
@@ -86,7 +102,7 @@ if st.button("Analyze Traffic Case"):
     st.write("Medium Risk:", result["Medium Membership"])
     st.write("High Risk:", result["High Membership"])
 
-    st.subheader("RecommendedAction")
+    st.subheader("Recommended Action")
     st.success(result["Recommended Action"])
 
     report_data = pd.DataFrame([{
@@ -111,9 +127,7 @@ if st.button("Analyze Traffic Case"):
         data=csv,
         file_name="pak_smartflow_report.csv",
         mime="text/csv",
+        use_container_width=True
     )
 
-    st.warning(
-        "Prototype recommendation only. Human review is required "
-        "before any enforcement action."
-    )
+disclaimer()
