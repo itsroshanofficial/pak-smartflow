@@ -24,7 +24,15 @@ _CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 html, body, .stApp { font-family: 'Inter', sans-serif; }
 .stApp { background: radial-gradient(900px 500px at 8% -10%, rgba(56,189,248,.14), transparent), radial-gradient(800px 500px at 100% 0%, rgba(245,184,61,.10), transparent), #0D1B2A; }
-#MainMenu, footer { visibility: hidden; }
+
+/* Streamlit elements hide karne ke liye rules */
+#MainMenu { visibility: hidden; }
+header { visibility: hidden; }
+footer { visibility: hidden; }
+.stAppDeployButton { display: none; }
+[data-testid="stToolbar"] { visibility: hidden; display: none; }
+[data-testid="stDecoration"] { visibility: hidden; }
+
 .block-container { padding-top: 1.4rem; max-width: 1280px; }
 section[data-testid="stSidebar"] { background: linear-gradient(180deg,#0f2238,#0a1626); border-right: 1px solid rgba(255,255,255,.06); }
 .hero { padding: 26px 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(135deg, rgba(20,38,59,.95), rgba(13,27,42,.9)); position: relative; overflow: hidden; margin-bottom: 18px; }
