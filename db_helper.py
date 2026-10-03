@@ -1,7 +1,6 @@
 import streamlit as st
 from supabase import create_client, Client
 
-# Streamlit secrets se secure credentials fetch karna
 SUPABASE_URL = st.secrets["supabase"]["url"]
 SUPABASE_KEY = st.secrets["supabase"]["key"]
 
@@ -9,7 +8,6 @@ SUPABASE_KEY = st.secrets["supabase"]["key"]
 def init_connection() -> Client:
     return create_client(SUPABASE_URL, SUPABASE_KEY)
 
-# Global client instance
 supabase = init_connection()
 
 def insert_violation(plate: str, violation_type: str, risk_score: float, final_score: float, action: str):
