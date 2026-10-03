@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
-from ui import inject_css, hero, disclaimer, CYAN, AMBER, GREEN, RED
+from ui import inject_css, hero, disclaimer, back_to_home, CYAN, AMBER, GREEN, RED
 
 st.set_page_config(
     page_title="Pak-SmartFlow - Dispute & Appeal Center",
@@ -69,5 +69,6 @@ if search_id:
         }])
         csv = dispute_df.to_csv(index=False).encode('utf-8')
         st.download_button("📥 Download Dispute Receipt (CSV)", data=csv, file_name="dispute_receipt.csv", mime="text/csv", use_container_width=True)
+
 back_to_home()
 disclaimer()
