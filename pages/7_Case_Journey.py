@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
-from ui import inject_css, hero, pipeline, terminal, disclaimer, CYAN, AMBER, GREEN, RED, VIOLET
+from ui import inject_css, hero, pipeline, terminal, disclaimer, back_to_home, CYAN, AMBER, GREEN, RED, VIOLET
 
 st.set_page_config(page_title="Case Journey · Pak-SmartFlow", page_icon="🎬", layout="wide")
 inject_css()
@@ -42,6 +42,6 @@ terminal([
 ])
 
 st.markdown("### 📊 Decision Explainability Breakdown")
-st.write("Yeh graph batata hai ke multi-agent system ne kis tarah risk score aur weights calculate kiye hain.")
 
+back_to_home()
 disclaimer()
