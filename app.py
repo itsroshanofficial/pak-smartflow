@@ -1,5 +1,5 @@
-
 import streamlit as st
+import pandas as pd
 from pak_smartflow_engine import pak_smartflow_engine
 
 st.set_page_config(
@@ -88,6 +88,31 @@ if st.button("Analyze Traffic Case"):
 
     st.subheader("Recommended Action")
     st.success(result["Recommended Action"])
+
+    # Report Export Feature Added Here
+    report_data = pd.DataFrame([{
+        "Violation": violation,
+        "Detection Confidence": confidence,
+        "Severity Score": severity,
+        "Safety Risk": safety_risk,
+        "Traffic Density": traffic_density,
+        "Vehicle History": vehicle_history,
+        "Predicted Risk": predicted_risk,
+        "Compliance Score": compliance,
+        "Risk Score": result["Risk Score"],
+        "Fuzzy Decision Score": result["Fuzzy Decision Score"],
+        "Final Decision Score": result["Final Decision Score"],
+        "Recommended Action": result["Recommended Action"]
+    }])
+
+    csv = report_data.to_csv(index=False).encode('utf-8')
+
+    st.download_button(
+        label="📥 Download Analysis Report (CSV)",
+        data=csv,
+        file_name="pak_smartflow_report.csv",
+        mime="text/csv",
+    )
 
     st.warning(
         "Prototype recommendation only. Human review is required "
