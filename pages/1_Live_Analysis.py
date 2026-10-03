@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
 from pak_smartflow_engine import pak_smartflow_engine
-from ui import inject_css, hero, disclaimer, CYAN, AMBER, GREEN, RED
+from ui import inject_css, hero, disclaimer, back_to_home, CYAN, AMBER, GREEN, RED
 
 st.set_page_config(
     page_title="Pak-SmartFlow - Live Analysis",
@@ -129,5 +129,6 @@ if st.button("Analyze Traffic Case", use_container_width=True):
         mime="text/csv",
         use_container_width=True
     )
+
 back_to_home()
 disclaimer()
