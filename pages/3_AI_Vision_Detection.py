@@ -7,8 +7,8 @@ import streamlit as st
 
 from pak_smartflow_engine import pak_smartflow_engine
 from db_helper import insert_violation
-from ui import (inject_css, hero, kpi, agent_card, style_fig, disclaimer, back_to_home,
-                AGENTS, AMBER, CYAN, GREEN, RED, VIOLET)
+from ui import (inject_css, hero, kpi, agent_card, style_fig, disclaimer,
+                back_to_home, AGENTS, AMBER, CYAN, GREEN, RED, VIOLET, SHADE)
 
 st.set_page_config(page_title="Pak-SmartFlow · Command Center", page_icon="🚦", layout="wide")
 inject_css()
@@ -49,7 +49,7 @@ with c2:
 
 c3, c4 = st.columns([1, 1.3])
 with c3:
-    st.markdown("#### 🗺️ Risk Hotspots")
+    st.markdown("#### 🗺 Risk Hotspots")
     hot = pd.DataFrame({
         "lat": [31.5204, 31.4504, 33.6844, 33.5651, 24.8607, 31.4187],
         "lon": [74.3587, 73.1350, 73.0479, 73.0169, 67.0011, 73.0790],
@@ -70,6 +70,7 @@ with c4:
         
         plate_no = f"{random.choice(['LEA','ISB','RSP','KHI'])}-{random.randint(1000,9999)}"
         
+        # Supabase database mein record insert karna
         insert_violation(
             plate=plate_no,
             violation_type=viol[0],
@@ -94,29 +95,24 @@ for i, (ic, nm, num, col) in enumerate(AGENTS):
     with cols[i % 4]:
         agent_card(ic, nm, num, col)
 
-# ---------- Quick Navigation Buttons ----------
+# ---------- Clean User Navigation ----------
 st.markdown("---")
-st.markdown("#### 🧭 Quick Page Navigation (All Modules)")
+st.markdown("#### 🧭 Quick Page Navigation")
 nav1, nav2, nav3 = st.columns(3)
 
 with nav1:
-    st.page_link("pages/7_Case_Journey.py", label="🎬 Case Journey", icon="🎬")
-    st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Traffic", icon="🚑")
+    st.page_link("app.py", label="Command Center (Home)", icon="🏠")
+    st.page_link("pages/1_Live_Analysis.py", label="Live Analysis", icon="📡")
+    st.page_link("pages/2_Historical_Analytics.py", label="Historical Analytics", icon="📈")
 
 with nav2:
-    st.page_link("pages/6_Enforcement_Escalation.py", label="🛡️ Compliance & Enforcement", icon="🛡️")
-    st.page_link("pages/5_Dispute_Resolution.py", label="⚖️ Dispute Center", icon="⚖️")
+    st.page_link("pages/3_AI_Vision_Detection.py", label="AI Vision Detection", icon="👁️")
+    st.page_link("pages/4_Alert_System.py", label="Alert System", icon="🚨")
+    st.page_link("pages/5_Dispute_Resolution.py", label="Dispute Resolution", icon="⚖️")
 
 with nav3:
-    st.page_link("pages/4_Alert_System.py", label="🚨 Alert System", icon="🚨")
-    st.page_link("pages/2_Historical_Analytics.py", label="📈 Historical Analytics", icon="📈")
+    st.page_link("pages/6_Enforcement_Escalation.py", label="Enforcement & Escalation", icon="🛡️")
+    st.page_link("pages/7_Case_Journey.py", label="Case Journey", icon="🎬")
+    st.page_link("pages/8_Emergency_Traffic.py", label="Emergency Traffic", icon="🚑")
 
-st.markdown("#### 🎬 Judges ke liye Special Demos")
-a, b = st.columns(2)
-with a:
-    st.page_link("pages/7_Case_Journey.py", label="▶ Start End-to-End Demo", icon="🎬")
-with b:
-    st.page_link("pages/8_Emergency_Traffic.py", label="🚑 Emergency Green Corridor", icon="🚦")
-
-back_to_home()
 disclaimer()
