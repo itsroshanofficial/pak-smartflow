@@ -1,11 +1,27 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import streamlit.components.v1 as components
 from db_helper import get_violations
 from ui import inject_css, hero, kpi, style_fig, disclaimer, CYAN, AMBER, GREEN, RED
 
 st.set_page_config(page_title="Historical Analytics · Pak-SmartFlow", page_icon="📈", layout="wide")
 inject_css()
+
+# Professional Navigation Buttons
+col_back, col_home = st.columns([1, 4])
+with col_back:
+    components.html("""
+        <div style="padding-top: 2px;">
+            <button onclick="window.history.back()" style="background: rgba(20,38,59,0.8); color: #38BDF8; border: 1px solid rgba(56,189,248,0.4); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;">
+                ⬅ Back
+            </button>
+        </div>
+    """, height=45)
+with col_home:
+    st.page_link("app.py", label="Go to Main Dashboard", icon="🏠")
+
+st.write("")
 
 hero(
     "📈 Historical Analytics & Cloud Data",
