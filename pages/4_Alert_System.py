@@ -88,5 +88,5 @@ if st.button("🚀 Dispatch Automated Alert", use_container_width=True):
     )
 
 st.info("💡 **Note:** This simulation demonstrates automated emergency and fine notification dispatches to vehicle owners and control units.")
-
+back_to_home()
 disclaimer()
