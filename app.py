@@ -95,6 +95,17 @@ for i, (ic, nm, num, col) in enumerate(AGENTS):
     with cols[i % 4]:
         agent_card(ic, nm, num, col)
 
+# ---------- Quick Navigation for Mobile/Web ----------
+st.markdown("---")
+st.markdown("#### 🧭 Quick Page Navigation")
+nav1, nav2, nav3 = st.columns(3)
+with nav1:
+    st.page_link("app.py", label="Command Center", icon="🏠")
+with nav2:
+    st.page_link("pages/2_Historical_Analytics.py", label="Historical Analytics", icon="📈")
+with nav3:
+    st.page_link("pages/7_Case_Journey.py", label="Case Journey", icon="🎬")
+
 st.markdown("#### 🎬 Judges ke liye")
 a, b = st.columns(2)
 with a:
