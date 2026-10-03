@@ -27,9 +27,10 @@ def insert_violation(plate: str, violation_type: str, risk_score: float, final_s
         return None
 
 def get_violations(limit: int = 50):
-    """Supabase table se recent violations fetch karta hai."""
+    """Supabase table se recent violations fetch karta hai (order removed)."""
     try:
-        response = supabase.table("violations").select("*").order("created_at", desc=True).limit(limit).execute()
+        # created_at ke baghair direct data fetch karenge
+        response = supabase.table("violations").select("*").limit(limit).execute()
         return response.data
     except Exception as e:
         st.error(f"Data fetch karne mein error aaya: {e}")
