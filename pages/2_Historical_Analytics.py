@@ -60,5 +60,5 @@ else:
                          title="Risk Score Distribution by Violation Type",
                          color_discrete_sequence=[CYAN, AMBER, RED, GREEN])
         st.plotly_chart(style_fig(fig, 300), use_container_width=True)
-
+back_to_home()
 disclaimer()
