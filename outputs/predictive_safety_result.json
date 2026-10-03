@@ -1,0 +1,16 @@
+{
+    "timestamp": "2026-10-03 16:26:17",
+    "risk_level": "MEDIUM",
+    "risk_confidence": 85.0,
+    "speed_kmh": 70,
+    "distance_m": 20,
+    "sudden_braking": true,
+    "trajectory_change": false,
+    "traffic_density": "MEDIUM",
+    "risk_indicators": [
+        "elevated vehicle speed",
+        "short following distance",
+        "sudden braking detected"
+    ],
+    "recommended_action": "Flag for closer monitoring."
+}

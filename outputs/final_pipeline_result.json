@@ -1,0 +1,24 @@
+{
+    "timestamp": "2026-10-03 19:35:33",
+    "input_image": "data/number_plates/test/images/DSC_0329_jpg.rf.e290fd79a0d3e95ee25d266337683c07.jpg",
+    "detection": {
+        "violation_type": "number plate",
+        "detection_confidence": 0.95,
+        "evidence_frame": "output/final_evidence.jpg"
+    },
+    "anpr": {
+        "vehicle_number": "5LEF1293503",
+        "plate_confidence": 0.93,
+        "plate_crop": "output/final_plate_crop.jpg",
+        "ocr_status": "READ"
+    },
+    "predictive_safety": {
+        "speed_kmh": 70,
+        "distance_meters": 20,
+        "sudden_braking": true,
+        "trajectory_change": false,
+        "traffic_density": 2,
+        "risk_level": "MEDIUM",
+        "prediction_confidence": 85.0
+    }
+}

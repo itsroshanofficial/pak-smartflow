@@ -1,0 +1,12 @@
+{
+    "image": "output/test_traffic.jpg",
+    "timestamp": "2026-10-03 17:22:56",
+    "detections": [
+        {
+            "timestamp": "2026-10-03 17:22:56",
+            "violation_type": "number plate",
+            "detection_confidence": 0.83,
+            "evidence_frame": "output/evidence_traffic.jpg"
+        }
+    ]
+}

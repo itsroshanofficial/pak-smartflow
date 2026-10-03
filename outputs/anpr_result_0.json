@@ -1,0 +1,45 @@
+{
+    "timestamp": "2026-10-03 19:23:44",
+    "vehicle_number": "FEET",
+    "plate_confidence": 0.92,
+    "plate_crop": "output/anpr_plate_0.jpg",
+    "ocr_status": "READ",
+    "ocr_candidates": [
+        {
+            "text": "L6NGF",
+            "orientation": "rotated",
+            "processing": "enhanced",
+            "config": "--psm 6"
+        },
+        {
+            "text": "FEET",
+            "orientation": "rotated",
+            "processing": "enhanced",
+            "config": "--psm 8"
+        },
+        {
+            "text": "FEET",
+            "orientation": "rotated",
+            "processing": "enhanced",
+            "config": "--psm 13"
+        },
+        {
+            "text": "47ZS",
+            "orientation": "rotated",
+            "processing": "sharpened",
+            "config": "--psm 6"
+        },
+        {
+            "text": "4E43",
+            "orientation": "rotated",
+            "processing": "otsu",
+            "config": "--psm 6"
+        },
+        {
+            "text": "4E437",
+            "orientation": "rotated",
+            "processing": "inverted",
+            "config": "--psm 6"
+        }
+    ]
+}
