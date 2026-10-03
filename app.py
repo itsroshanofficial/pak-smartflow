@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from pak_smartflow_engine import pak_smartflow_engine
+from db_helper import insert_violation
 from ui import (inject_css, hero, kpi, agent_card, style_fig, disclaimer,
                 AGENTS, AMBER, CYAN, GREEN, RED, VIOLET)
 
@@ -66,8 +67,20 @@ with c4:
             round(random.uniform(.8, .99), 2), viol[1], round(random.uniform(.2, .9), 2),
             round(random.uniform(.2, .9), 2), round(random.uniform(.1, .8), 2),
             round(random.uniform(.2, .9), 2), round(random.uniform(.2, .9), 2))
+        
+        plate_no = f"{random.choice(['LEA','ISB','RSP','KHI'])}-{random.randint(1000,9999)}"
+        
+        # Supabase database mein record insert karna
+        insert_violation(
+            plate=plate_no,
+            violation_type=viol[0],
+            risk_score=r["Risk Score"],
+            final_score=r["Final Decision Score"],
+            action=r["Recommended Action"]
+        )
+
         st.session_state.feed.insert(0, {
-            "Plate": f"{random.choice(['LEA','ISB','RSP','KHI'])}-{random.randint(1000,9999)}",
+            "Plate": plate_no,
             "Violation": viol[0], "Risk": r["Risk Score"],
             "Final Score": r["Final Decision Score"], "Action": r["Recommended Action"]})
     feed = pd.DataFrame(st.session_state.feed[:8]) if st.session_state.feed else pd.DataFrame(
