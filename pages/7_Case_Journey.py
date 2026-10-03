@@ -1,9 +1,25 @@
 import streamlit as st
 import pandas as pd
-from ui import inject_css, hero, pipeline, terminal, disclaimer, CYAN, AMBER, GREEN, RED
+import streamlit.components.v1 as components
+from ui import inject_css, hero, pipeline, terminal, disclaimer, CYAN, AMBER, GREEN, RED, VIOLET
 
 st.set_page_config(page_title="Case Journey · Pak-SmartFlow", page_icon="🎬", layout="wide")
 inject_css()
+
+# True Back Button (Browser history back) aur Main Dashboard link sath mein
+col_back, col_home = st.columns([1, 4])
+with col_back:
+    components.html("""
+        <div style="padding-top: 2px;">
+            <button onclick="window.history.back()" style="background: rgba(20,38,59,0.8); color: #38BDF8; border: 1px solid rgba(56,189,248,0.4); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;">
+                ⬅ Back
+            </button>
+        </div>
+    """, height=45)
+with col_home:
+    st.page_link("app.py", label="Go to Main Dashboard", icon="🏠")
+
+st.write("")
 
 hero(
     "🎬 End-to-End Case Journey",
