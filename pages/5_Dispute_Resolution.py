@@ -69,5 +69,5 @@ if search_id:
         }])
         csv = dispute_df.to_csv(index=False).encode('utf-8')
         st.download_button("📥 Download Dispute Receipt (CSV)", data=csv, file_name="dispute_receipt.csv", mime="text/csv", use_container_width=True)
-
+back_to_home()
 disclaimer()
