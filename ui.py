@@ -161,6 +161,11 @@ def gauge(value, title, low=0.3, high=0.6, height=230, invert=False):
     ))
     return style_fig(fig, height)
 
+def back_to_home():
+    """Har sub-page par Command Center par wapas jaane ke liye button"""
+    st.markdown("---")
+    st.page_link("app.py", label="← Back to Command Center", icon="🏠")
+
 def disclaimer():
     st.markdown(
         "<div style='margin-top:14px;color:#8ea5bd;font-size:.78rem'>⚠️ Prototype / simulation. "
